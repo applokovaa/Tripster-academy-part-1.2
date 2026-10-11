@@ -186,4 +186,341 @@ console.log(camelize("-webkit-transition"));
 
 // task #67
 
+function filterRange(arr, a, b) {
+  return arr.filter(item => item >= a && item <= b);
+}
 
+let arr = [5, 3, 8, 1];
+
+let filtered = filterRange(arr, 1, 4);
+
+console.log(filtered);
+console.log(arr);
+
+// Task #68
+
+function filterRangeInPlace(arr, a, b) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] < a || arr[i] > b) {
+      arr.splice(i, 1);
+      i--;
+    }
+  }
+}
+
+let arr = [5, 3, 8, 1];
+
+filterRangeInPlace(arr, 1, 4);
+
+console.log(arr);
+
+
+// Task #69
+
+
+let arr = [5, 2, 1, -10, 8];
+
+arr.sort((a, b) => b - a);
+
+console.log(arr);
+
+
+// Task #70
+
+
+function copySorted(arr) {
+  return arr.slice().sort();
+}
+
+let arr = ["HTML", "JavaScript", "CSS"];
+
+let sorted = copySorted(arr);
+
+console.log(sorted);
+console.log(arr);
+
+
+// Task #71
+
+
+function Calculator() {
+  this.methods = {
+    "-": (a, b) => a - b,
+    "+": (a, b) => a + b
+  };
+
+  this.calculate = function(str) {
+    let parts = str.split(" ");
+
+    let a = +parts[0];
+    let operator = parts[1];
+    let b = +parts[2];
+
+    if (!this.methods[operator] || isNaN(a) || isNaN(b)) {
+      return NaN;
+    }
+
+    return this.methods[operator](a, b);
+  };
+
+  this.addMethod = function(name, func) {
+    this.methods[name] = func;
+  };
+}
+
+let calc = new Calculator();
+
+console.log(calc.calculate("3 + 7"));
+console.log(calc.calculate("10 - 4"));
+
+calc.addMethod("*", (a, b) => a * b);
+
+console.log(calc.calculate("3 * 4"));
+
+
+// Task #72
+
+
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 28 };
+
+let users = [vasya, petya, masha];
+
+let names = users.map(user => user.name);
+
+console.log(names);
+
+
+// Task #73
+
+
+let vasya = { name: "Вася", surname: "Пупкин", id: 1 };
+let petya = { name: "Петя", surname: "Иванов", id: 2 };
+let masha = { name: "Маша", surname: "Петрова", id: 3 };
+
+let users = [vasya, petya, masha];
+
+let usersMapped = users.map(user => ({
+  fullName: `${user.name} ${user.surname}`,
+  id: user.id
+}));
+
+console.log(usersMapped);
+
+
+// Task #74
+
+
+function sortByAge(arr) {
+  arr.sort((a, b) => a.age - b.age);
+}
+
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 28 };
+
+let arr = [vasya, petya, masha];
+
+sortByAge(arr);
+
+console.log(arr);
+
+
+// Task #75
+
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+let arr = [1, 2, 3, 4, 5];
+
+shuffle(arr);
+
+console.log(arr);
+
+
+// Task #76
+
+
+function getAverageAge(users) {
+  return users.reduce((sum, user) => sum + user.age, 0) / users.length;
+}
+
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 29 };
+
+let arr = [vasya, petya, masha];
+
+console.log(getAverageAge(arr));
+
+
+// Task #77
+
+
+function unique(arr) {
+  let result = [];
+
+  for (let value of arr) {
+    if (!result.includes(value)) {
+      result.push(value);
+    }
+  }
+
+  return result;
+}
+
+let strings = [
+  "кришна", "кришна", "харе", "харе",
+  "харе", "харе", "кришна", "кришна", ":-O"
+];
+
+console.log(unique(strings));
+
+// Task #78
+
+
+function groupById(array) {
+  return array.reduce((result, item) => {
+    result[item.id] = item;
+    return result;
+  }, {});
+}
+
+let users = [
+  { id: "john", name: "John Smith", age: 20 },
+  { id: "ann", name: "Ann Smith", age: 24 },
+  { id: "pete", name: "Pete Peterson", age: 31 }
+];
+
+let usersById = groupById(users);
+
+console.log(usersById);
+
+
+// Task #79
+
+
+function sumSalaries(salaries) {
+  let sum = 0;
+
+  for (let salary of Object.values(salaries)) {
+    sum += salary;
+  }
+
+  return sum;
+}
+
+let salaries = {
+  "John": 100,
+  "Pete": 300,
+  "Mary": 250
+};
+
+console.log(sumSalaries(salaries));
+
+
+// Task #80
+
+
+function count(obj) {
+  return Object.keys(obj).length;
+}
+
+let user = {
+  name: "John",
+  age: 30
+};
+
+console.log(count(user));
+
+
+// Task #81
+
+
+let user = {
+  name: "John",
+  years: 30
+};
+
+let { name, years: age, isAdmin = false } = user;
+
+console.log(name);
+console.log(age);
+console.log(isAdmin);
+
+
+// Task #82
+
+
+
+function topSalary(salaries) {
+  let max = 0;
+  let maxName = null;
+
+  for (let [name, salary] of Object.entries(salaries)) {
+    if (salary > max) {
+      max = salary;
+      maxName = name;
+    }
+  }
+
+  return maxName;
+}
+
+let salaries = {
+  "John": 100,
+  "Pete": 300,
+  "Mary": 250
+};
+
+console.log(topSalary(salaries));
+console.log(topSalary({}));
+
+
+// Task #83
+
+
+let user = {
+  name: "Василий Иванович",
+  age: 35
+};
+
+let json = JSON.stringify(user);
+let user2 = JSON.parse(json);
+
+console.log(json);
+console.log(user2);
+
+
+// Task #84
+
+
+let room = {
+  number: 23
+};
+
+let meetup = {
+  title: "Совещание",
+  occupiedBy: [{ name: "Иванов" }, { name: "Петров" }],
+  place: room
+};
+
+room.occupiedBy = meetup;
+meetup.self = meetup;
+
+let json = JSON.stringify(meetup, function replacer(key, value) {
+  if (key !== "" && value === meetup) {
+    return undefined;
+  }
+
+  return value;
+}, 2);
+
+console.log(json);
